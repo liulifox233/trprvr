@@ -95,8 +95,8 @@ fn main() {
     }
 
     println!(
-        "Progress: {}%",
-        (chinese_count * 100) as f32 / (japanese_count + chinese_count) as f32
+        r#"{{"progress": {}}}"#,
+        chinese_count as f32 / (japanese_count + chinese_count) as f32
     );
 }
 
