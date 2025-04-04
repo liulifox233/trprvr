@@ -2,6 +2,10 @@
 name = "trprvr"
 version = "0.1.0"
 edition = "2024"
+license = "GPL-3.0-or-later"
+description = "TRanslate PRogress VieweR"
+repository = "https://github.com/liulifox233/trprvr"
+readme = "README.md"
 
 [dependencies]
 aspasia = "0.2.1"
