@@ -21,7 +21,7 @@ struct Input {
 
 fn main() {
     let input = Input::parse();
-    let supported_extensions = ["ass", "srt", "vtt", "lrc"];
+    let supported_extensions = ["ass", "srt", "vtt", "lrc", "ks"];
     let mut chinese_count = 0;
     let mut japanese_count = 0;
 
@@ -79,10 +79,9 @@ fn main() {
             "srt" => parse_srt(&contents, path),
             "vtt" => parse_vtt(&contents, path),
             "lrc" => parse_lrc(&contents, path),
+            "ks" => parse_kag(&contents, path),
             _ => continue,
         };
-
-        // println!("{:#?}", texts);
 
         for text in texts {
             let cleaned = clean_text(&text);
@@ -153,6 +152,18 @@ fn parse_lrc(contents: &str, path: &std::path::Path) -> Vec<String> {
         .iter()
         .map(|(_, text)| text.to_string())
         .filter(|text| !text.trim().is_empty())
+        .collect()
+}
+
+fn parse_kag(contents: &str, _path: &std::path::Path) -> Vec<String> {
+    let lines = contents.lines();
+
+    lines
+        .into_iter()
+        .filter(|l| {
+            !l.starts_with("[") && !l.starts_with(";") && !l.starts_with("#") && !l.starts_with("*")
+        })
+        .map(|l| l.to_string())
         .collect()
 }
 
